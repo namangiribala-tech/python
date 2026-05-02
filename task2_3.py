@@ -45,3 +45,29 @@ print("P(B):", P_B)
 print("P(A ∩ B):", A_intersection_B)
 print("P(A ∪ B):", P_union)
 
+#(iii) Total Probability
+P = (0.95 * 0.40) + (0.88 * 0.35) + (0.80 * 0.25)
+print("P(Success):", P)
+
+#(iv) Bayes Theorem
+
+P_success = P
+P_failure = 1 - P_success
+
+zones = [0.40, 0.35, 0.25]
+fail_rates = [1-0.95, 1-0.88, 1-0.80]
+
+for i in range(3):
+    posterior = (fail_rates[i] * zones[i]) / P_failure
+    print(f"P(Zone {i+1} | Failure):", posterior)
+
+#(v & vi) Expectation, Variance, Std Dev
+values = O.flatten()
+
+E = np.mean(values)
+Var = np.var(values)
+std = np.std(values)
+
+print("E[X]:", E)
+print("Var(X):", Var)
+print("Std Dev:", std)
