@@ -1,0 +1,34 @@
+import phonenumbers as p
+from phonenumbers import geocoder,timezone,carrier
+from opencage.geocoder import OpenCageGeocode
+import folium
+
+key='17a670f53ae6426fa7248dd9825e4126'
+
+number=input('enter a phone number')
+phone_numbers=p.parse(number)
+
+valid=p.is_valid_number(phone_numbers)
+possible= p.is_possible_number(phone_numbers)
+
+if ((valid and possible)== True):
+    Carrier=carrier.name_for_number(phone_numbers, "en")
+    Region= geocoder.description_for_number(phone_numbers, 'en') 
+    timezones=timezone.time_zones_for_number(phone_numbers)
+    print("The Phone carrier:",Carrier)
+    print("The cell Location is: ",Region)
+    print("The time zone is: ",timezones)
+
+    geocoder = OpenCageGeocode (key)
+    query= str(Region)
+
+    Result= geocoder.geocode(query)
+    lat=Result[0]['geometry']['lat']
+    Ing= Result[0]['geometry']['lng']
+    print("The latitude and longitude are:", '[', lat,',', Ing, ']')
+    myMap=folium.Map(location=[lat, Ing], zoom_start=5)
+    folium.Marker([lat, Ing], popup=Region).add_to(myMap)
+
+    myMap.save('G:\\locations se\\yourLocation.html')
+else:
+    print('number not valid')

@@ -1,0 +1,9 @@
+l=[]
+x=int(input(''))
+y=int(input(''))
+z=int(input('a'))
+a=y-x
+b=z/3
+l.append(a)
+l.append(b)
+print(l)
